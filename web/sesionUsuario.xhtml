@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Garach</title>
+        <meta name="author" content="The Author"></meta>
+
+
+        <script>
+
+            var socket = new WebSocket("ws://192.168.43.63:8080/Proyecto_Integrador/progress");
+
+            socket.onmessage = (event) => {
+
+                document.getElementById("j_idt39:mensajes").value = document.getElementById("j_idt39:mensajes").value + "\n" + event.data;
+
+
+                //alert(event.data);
+            }
+
+            function formSubmit() {
+                texto = document.getElementById("j_idt39:mensajenuevo").value;
+                socket.send(texto);
+
+            }
+
+        </script>
+
+
+
+
+
+
+
+
+    </h:head>
+    <!-- Add 50px padding top to the body for the navbar -->
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+
+        <ui:include src="barraNavegacionAdmin.xhtml"></ui:include>
+
+        <b:image name="test" value="https://www.romavimotos.com/pub/media/vicomage/slider/resized/l/i/liquidacion-temporada-romavi-motos-banner.jpg"  tooltip="Ain't he a beauty?" style="width:1540px;height:500px"/>
+
+        <br></br>
+
+
+        <b:image name="test" value="https://lh3.googleusercontent.com/4MxsnlIsFSa2hkaWLiwy1CW-ugaTzDuRDaFaVs06QLTM9-KDEeAUr0zovTvkjjsF2nA6o77MKbDnVQ=w1920-h931"  tooltip="Ain't he a beauty?" style="width:1540px;height:400px"/>
+        <br></br>
+        <br></br>
+        <b:column col-sm="6" col-md="6">
+            <h1>Encuentrenos aqui </h1>
+
+            <div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=3.331527559875894,-76.52406692504883&amp;q=Calle%2025%20Cali+(Garach)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/coordinates.html">find my location</a></iframe></div><br />
+            <div id="map"></div>
+
+
+
+
+
+
+
+
+        </b:column>
+        <b:column col-sm="4" col-md="6">
+
+
+
+            <h:form>
+
+                <b:row styleClass="show-grid">
+
+                    <b:column span="8" offset="4"><h:outputText/>
+                        <h1>Preguntanos </h1>
+                        <b:panelGrid colSpans="10,2" size="sm">
+                            <b:panel title="Chat" look="primary">
+
+                                    
+                                    <h:inputTextarea id="mensajes"></h:inputTextarea>
+                                    <br></br>
+                                    <h:inputText id="mensajenuevo"></h:inputText>
+                                    <br></br>
+                                    <h:commandButton  value="Enviar Mensaje" onclick="formSubmit();
+                                            return false;"></h:commandButton>
+
+                                
+
+
+
+                            </b:panel>
+
+                        </b:panelGrid>
+
+
+
+
+
+                    </b:column>
+                </b:row>
+
+
+            </h:form>
+
+
+
+
+        </b:column>
+
+
+
+
+
+    </h:body>
+</html> 

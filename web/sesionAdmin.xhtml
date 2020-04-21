@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Garach</title>
+        <meta name="author" content="The Author"></meta>
+
+        <script>
+
+            var socket = new WebSocket("ws://192.168.43.63:8080/Proyecto_Integrador/progress");
+
+            socket.onmessage = (event) => {
+
+                document.getElementById("j_idt75:j_idt82:mensajes").value = document.getElementById("j_idt75:j_idt82:mensajes").value + "\n" + event.data;
+
+
+               // alert(event.data);
+            }
+
+            function formSubmit() {
+                texto = document.getElementById("j_idt75:j_idt82:mensajenuevo").value;
+                socket.send(texto);
+
+            }
+
+        </script>
+
+    </h:head>
+    <!-- Add 50px padding top to the body for the navbar -->
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <b:navBar brand="Garach" brandHref="faces/motos.xhtml" inverse="true" fixed="top">
+            <b:navbarLinks>
+
+                <b:navLink value="Comprar" href="venta.xhtml"></b:navLink>
+
+
+            </b:navbarLinks> 
+
+            <h:form styleClass="navbar-form navbar-right">
+
+
+
+                <b:commandButton action="#" value="Bienvenido #{controllerAdministradores.nombre}"  iconAlign="right"/>
+                <b:commandButton action="#{controllerAdministradores.dirigir()}" value="Cerrar sesion"  iconAlign="right"/>
+
+            </h:form>
+        </b:navBar>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <h1>Administrador</h1>
+        <br></br>
+        <br></br>
+        <b:tabView tabPosition="left" contentStyle="border: 1px solid #ddd;padding:10px">
+            <b:tab title="Listado de ventas">
+                <h:form>
+                    <b:inputText label="Nombre Columna" value="#{controladorVenta.searchName}" ></b:inputText>
+                    <b:inputText label="Busqueda" value="#{controladorVenta.search}" ></b:inputText>
+
+                    <h:commandButton value="Enviar" action="#{controladorVenta.findAllBySearch()}"></h:commandButton>
+                </h:form>
+
+                <h:form >
+                    <b:dataTable value="#{controladorVenta.findAll()}" var="ven" searching="false" paginated="false" info="false">
+                        <b:dataTableColumn value="#{ven.id}" />
+                        <b:dataTableColumn value="#{ven.fechaVenta}" label="Fecha de venta" />
+                        <b:dataTableColumn value="#{ven.idCliente}" />
+                        <b:dataTableColumn value="#{ven.idProducto}" />
+                        <b:dataTableColumn value="#{ven.cantidad}" />
+                        <b:dataTableColumn value="#{ven.subtotal}" />
+                        <b:dataTableColumn value="#{ven.total}" />
+                        
+
+
+                    </b:dataTable>
+                </h:form>
+            </b:tab>
+            <b:tab title="Registrar productos ">
+                <b:image name="test" value="data:image/jpeg;base64,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"  tooltip="Ain't he a beauty?" tooltipPosition="right"/>
+
+                <br></br>
+                <br></br>
+                <h:form >
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <b:inputText label="Descripcion" labelStyle="width:80px;"  value="#{controladorProductos.objetProducto.descripcion}">
+
+                        </b:inputText>
+                        <b:inputText label="Marca:" labelStyle="width:80px;" value="#{controladorProductos.objetProducto.marca}">
+
+                        </b:inputText>
+                        <b:inputText label="Proveedor:" labelStyle="width:80px;" value="#{controladorProductos.objetProducto.proveedor}">
+                        </b:inputText>
+
+                        <b:inputText label="Precio:" labelStyle="width:80px;" value="#{controladorProductos.objetProducto.precio}">
+                        </b:inputText>
+
+                        <b:inputText label="Cantidad:" labelStyle="width:80px;" value="#{controladorProductos.objetProducto.cantidad}">
+                        </b:inputText>
+
+
+                    </h:panelGrid>
+
+                    <h:commandButton value="Insertar" action="#{controladorProductos.registrar()}"></h:commandButton>
+                </h:form>
+
+                <br></br>
+                <br></br>
+                <br></br>
+
+                ...............................................................................................................
+                <br></br>
+                <br></br>
+                <br></br>
+
+
+                <h:form>
+                    <b:inputText label="Nombre Columna" value="#{controladorVenta.searchName}" ></b:inputText>
+                    <b:inputText label="Busqueda" value="#{controladorVenta.search}" ></b:inputText>
+
+                    <h:commandButton value="Enviar" action="#{controladorVenta.findAllBySearch()}"></h:commandButton>
+                </h:form>
+
+                <h:form >
+                    <b:dataTable value="#{controladorProductos.findAll()}" var="producto" searching="false" paginated="false" info="false">
+                        <b:dataTableColumn value="#{producto.id}" />
+                        <b:dataTableColumn value="#{producto.descripcion}" label="Fecha de venta" />
+                        <b:dataTableColumn value="#{producto.marca}" />
+                        <b:dataTableColumn value="#{producto.proveedor}" />
+                        <b:dataTableColumn value="#{producto.precio}" />
+                        <b:dataTableColumn value="#{producto.cantidad}" />
+
+
+
+                    </b:dataTable>
+                </h:form>
+
+
+                <br></br>
+
+
+
+
+
+
+            </b:tab>
+            <b:tab title="Registro de proveedores ">
+                <b:image name="test" value="https://innovacionaudiovisual.com/wp-content/uploads/2017/03/001-people-3-1.png"  tooltip="Ain't he a beauty?" tooltipPosition="right"/>
+
+                <br></br>
+                <br></br>
+
+                <h:form>
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <b:inputText label="Nombre" labelStyle="width:80px;"  value="#{controladorproveedor.nombre}">
+
+                        </b:inputText>
+                        <b:inputText label="Telefono:" labelStyle="width:80px;" value="#{controladorproveedor.telefono}">
+
+                        </b:inputText>
+                        <b:inputText label="Drireccion:" labelStyle="width:80px;" value="#{controladorproveedor.direccion}">
+                        </b:inputText>
+
+                        <b:inputText label="Producto:" labelStyle="width:80px;" value="#{controladorproveedor.direccion}">
+                        </b:inputText>
+
+
+                        <h:commandButton value="Registrar" action="#{controladorproveedor.registrar()}"></h:commandButton>
+
+                    </h:panelGrid>
+                </h:form>
+                ...............................................................................................................
+                <br></br>
+                <br></br>
+                <br></br>
+
+
+                <h:form>
+                    <b:inputText label="Nombre Columna" value="#{controladorVenta.searchName}" ></b:inputText>
+                    <b:inputText label="Busqueda" value="#{controladorVenta.search}" ></b:inputText>
+
+                    <h:commandButton value="Enviar" action="#{controladorVenta.findAllBySearch()}"></h:commandButton>
+                </h:form>
+
+                <h:form >
+                    <b:dataTable value="#{controladorproveedor.findAll()}" var="proveedor" searching="false" paginated="false" info="false">
+                        <b:dataTableColumn value="#{proveedor.id}" />
+                        <b:dataTableColumn value="#{proveedor.nombre}" label="Fecha de venta" />
+                        <b:dataTableColumn value="#{proveedor.telefono}" />
+                        <b:dataTableColumn value="#{proveedor.direccion}" />
+                        <b:dataTableColumn value="#{proveedor.productos}" />
+
+
+
+
+                    </b:dataTable>
+                </h:form>
+
+
+
+
+
+
+            </b:tab>
+            <b:tab title="Chat">
+                
+                
+                     <b:row styleClass="show-grid">
+
+                    <b:column span="6" offset="6"><h:outputText/>
+                        <h1>Responde </h1>
+                        <b:panelGrid colSpans="6,6" size="sm">
+                            <b:panel title="Chat" look="primary">
+
+                                <h:form>       
+                                    <h:inputTextarea id="mensajes"></h:inputTextarea>
+                                    <br></br>
+                                    <h:inputText id="mensajenuevo"></h:inputText>
+                                    <br></br>
+                                    <h:commandButton  value="Enviar Mensaje" onclick="formSubmit();
+                                            return false " ></h:commandButton>
+
+                                </h:form>
+
+
+
+                            </b:panel>
+
+                        </b:panelGrid>
+
+
+
+
+
+                    </b:column>
+                </b:row>
+                
+                
+                
+               
+
+                   
+                
+                
+                
+          
+
+                
+
+
+            </b:tab>
+
+
+
+
+        </b:tabView>
+        <br></br>
+
+    </h:body>
+</html>    

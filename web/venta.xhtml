@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Garach</title>
+        <meta name="author" content="The Author"></meta>
+    </h:head>
+    <!-- Add 50px padding top to the body for the navbar -->
+
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+      
+
+        <ui:include src="barraNavegacionAdmin.xhtml"></ui:include>
+        
+        
+        
+        <b:image name="test" value="https://www.romavimotos.com/pub/media/vicomage/slider/resized/b/a/banner_seguridad-8.png"  tooltip="Ain't he a beauty?" style="width:1540px;height:500px"/>
+
+
+
+
+
+
+
+        
+        <br></br>
+        <br></br>
+
+        <b:tabView tabPosition="left" contentStyle="border: 1px solid #ddd;padding:10px">
+            <b:tab title="Cascos">
+                <b:container>
+
+                    <b:row>
+
+                        <b:column col-sm="8" col-md="8">
+                            <b:row>
+
+                                <ui:repeat value="#{controladorVenta.productosLista}" var="producto">
+
+                                    <b:column col-sm="4" col-md="4">
+                                        <b:row>
+                                            <b:column col-sm="12" col-md="12">
+                                                <h:form>
+                                                    <b:thumbnail>
+                                                        
+                                                        <f:facet name="caption">
+                                                            <h3>#{producto.descripcion}</h3>
+                                                            <p>Casco Modelo Halo personalizado a tu medida. <br></br><br></br>PRECIO:$#{producto.precio}</p>
+                                                             <br></br>
+                                                            <br></br>
+                                                            
+                                                            Cantidad <h:inputText value="#{controladorVenta.cantidades}"></h:inputText>
+                                                            <p>
+                                                                <h:commandButton value="Comprar" action="#{controladorVenta.Insertar(producto)}"/>
+                                                                
+                                                                <b:alert severity="success" rendered="#{controladorVenta.idUltimoProductoComprado == producto.id ? true : false}"><strong>Compra</strong> Compra realizada</b:alert>
+
+                                                            </p>
+                                                        </f:facet>
+                                                    </b:thumbnail>
+
+                                                </h:form> 
+                                            </b:column>
+
+                                        </b:row>       
+                                    </b:column>
+                                </ui:repeat>
+
+
+
+
+                            </b:row>
+
+
+                        </b:column>
+                    </b:row>     
+
+                </b:container>
+            </b:tab>
+            <b:tab title="Accesorios">
+                <b:container>
+
+                    <b:row>
+
+                        <b:column col-sm="8" col-md="8">
+                            <b:row>
+
+                                <ui:repeat value="#{controladorVenta.accesorios}" var="producto">
+
+                                    <b:column col-sm="4" col-md="4">
+                                        <b:row>
+                                            <b:column col-sm="12" col-md="12">
+                                                <h:form>
+                                                    <b:thumbnail>
+                                                        <f:facet name="caption">
+                                                            <h3>#{producto.descripcion}</h3>
+                                                            <p> <br></br><br></br>PRECIO:$#{producto.precio}</p>
+                                                            
+                                                            <br></br>
+                                                            <br></br>
+                                                            
+                                                            Cantidad <h:inputText value="#{controladorVenta.cantidades}"></h:inputText>
+                                                            <p>
+                                                                <h:commandButton value="Comprar" action="#{controladorVenta.Insertar(producto)}"/>
+                                                                
+                                                                <b:alert severity="success" rendered="#{controladorVenta.idUltimoProductoComprado == producto.id ? true : false}"><strong>Compra</strong> Compra realizada</b:alert>
+
+                                                            </p>
+                                                        </f:facet>
+                                                    </b:thumbnail>
+
+                                                </h:form> 
+                                            </b:column>
+
+                                        </b:row>       
+                                    </b:column>
+                                </ui:repeat>
+
+
+
+
+                            </b:row>
+
+
+                        </b:column>
+                    </b:row>     
+
+                </b:container>
+               
+                
+                
+                
+            </b:tab>
+            <b:tab title="Repuestos">
+                <b:container>
+
+                    <b:row>
+
+                        <b:column col-sm="8" col-md="8">
+                            <b:row>
+
+                                <ui:repeat value="#{controladorVenta.repuestos}" var="producto">
+
+                                    <b:column col-sm="4" col-md="4">
+                                        <b:row>
+                                            <b:column col-sm="12" col-md="12">
+                                                <h:form>
+                                                    <b:thumbnail>
+                                                        <f:facet name="caption">
+                                                            <h3>#{producto.descripcion}</h3>
+                                                             <br></br>
+                                                            <br></br>
+                                                            
+                                                            Cantidad <h:inputText value="#{controladorVenta.cantidades}" ></h:inputText>
+                                                            <p><br></br><br></br>PRECIO:$#{producto.precio}</p>
+                                                            <p>
+                                                                <h:commandButton value="Comprar" action="#{controladorVenta.Insertar(producto)}"  />
+                                                                
+                                                                <b:alert severity="success" rendered="#{controladorVenta.idUltimoProductoComprado == producto.id ? true : false}"><strong>Compra</strong> Compra realizada</b:alert>
+
+                                                            </p>
+                                                        </f:facet>
+                                                    </b:thumbnail>
+
+                                                </h:form> 
+                                            </b:column>
+
+                                        </b:row>       
+                                    </b:column>
+                                </ui:repeat>
+
+
+
+
+                            </b:row>
+
+
+                        </b:column>
+                    </b:row>     
+
+                </b:container>
+               
+                
+                
+                
+            </b:tab>
+                
+                
+            
+         
+              
+        </b:tabView>
+        <br></br>
+
+    </h:body>
+</html>    

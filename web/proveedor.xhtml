@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Garach</title>
+        <meta name="author" content="The Author"></meta>
+    </h:head>
+    <!-- Add 50px padding top to the body for the navbar -->
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <b:navBar brand="Garach" brandHref="#" inverse="true" fixed="top">
+            <b:navbarLinks>
+
+                <b:navLink value="Comprar" href="venta.xhtml"></b:navLink>
+
+                <b:dropMenu value="Registrarse">
+                    <b:navLink value="Usuario" href="faces/usuarios.xhtml"></b:navLink>
+                    <b:navLink value="Administrador" href="faces/administradores.xhtml"></b:navLink>
+
+                    <b:navLink></b:navLink>
+
+                </b:dropMenu>
+            </b:navbarLinks>
+            <h:form styleClass="navbar-form navbar-right">
+                <div class="form-group">
+                    <b:inputText placeholder="Email" fieldSize="sm"/>
+                    <!--input type="text" class="form-control" placeholder="Search"/-->
+                </div>
+                <div class="form-group">
+                    <b:inputText placeholder="Password" fieldSize="sm"/>
+                </div> 
+                #{' '}
+                <b:commandButton action="a" value="Sign in" look="success" icon="chevron-right" iconAlign="right"/>
+            </h:form>
+        </b:navBar>
+        <br></br>
+        <br></br>
+        
+        <b:image name="test" value="https://innovacionaudiovisual.com/wp-content/uploads/2017/03/001-people-3-1.png"  tooltip="Ain't he a beauty?" tooltipPosition="right"/>
+
+        <br></br>
+        <br></br>
+        <b:form inline="true">
+            <h:panelGrid columns="1" cellpadding="5">
+                <b:inputText label="Nombre" labelStyle="width:80px;"  value="#{controladorproveedor.nombre}">
+
+                </b:inputText>
+                <b:inputText label="Telefono:" labelStyle="width:80px;" value="#{controladorproveedor.telefono}">
+
+                </b:inputText>
+                <b:inputText label="Drireccion:" labelStyle="width:80px;" value="#{controladorproveedor.direccion}">
+                </b:inputText>
+
+                <b:inputText label="Producto:" labelStyle="width:80px;" value="#{controladorproveedor.direccion}">
+                </b:inputText>
+
+            </h:panelGrid>
+        </b:form>
+
+        <h:form>
+            <h:commandButton value="Enviar" action="#{controladorproveedor.registrar()}"></h:commandButton>
+        </h:form>
+
+    </h:body>
+</html>    

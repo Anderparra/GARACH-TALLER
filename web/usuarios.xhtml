@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+
+        <title>Garach</title>
+        <meta name="author" content="The Author"></meta>
+    </h:head>
+    <!-- Add 50px padding top to the body for the navbar -->
+    <h:body style="padding-top: 50px; padding-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;">
+        <b:navBar brand="Garach" brandHref="faces/motos.xhtml" inverse="true" fixed="top">
+            <b:navbarLinks>
+
+                <b:navLink value="Comprar" href="venta.xhtml"></b:navLink>
+
+                <b:dropMenu value="Registrarse">
+                    <b:navLink value="Usuario" href="usuarios.xhtml"></b:navLink>
+                    <b:navLink value="Administrador" href="administradores.xhtml"></b:navLink>
+
+                    <b:navLink></b:navLink>
+
+                </b:dropMenu>
+            </b:navbarLinks> 
+
+            <h:form styleClass="navbar-form navbar-right">
+                <div class="form-group">
+                    <b:inputText value="#{controladorusuarios.nombre}" placeholder="Nombre" fieldSize="sm"/>
+                    <!--input type="text" class="form-control" placeholder="Search"/-->
+                </div>
+                <div class="form-group">
+                    <b:inputSecret id="passwordDiv" fieldId="j_password" name="j_password"
+                                   value="#{controladorusuarios.contraseña}"
+                                   placeholder="contraseña"  />
+                    <b:message for="passwordDiv" />
+                </div> 
+                #{' '}
+                <b:commandButton action="#{controladorusuarios.logeo()}" value="Iniciar sesion" icon="chevron-right" iconAlign="right"/>
+
+            </h:form>
+        </b:navBar>
+
+
+        <br></br>
+        <br></br>
+        <h1>    Registrarse</h1>
+        <br></br>
+        <br></br>
+
+
+        <b:image name="test" value="https://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"  tooltip="Ain't he a beauty?" tooltipPosition="right"/>
+
+        <br></br>
+        <br></br>
+
+        <b:form inline="true">
+            <h:panelGrid columns="1" cellpadding="5">
+
+                <b:inputText label="Nombre" labelStyle="width:80px;"  value="#{controladorusuarios.objUsuario.nombre}">
+
+                </b:inputText>
+                <b:inputText label="Apellido:" labelStyle="width:80px;" value="#{controladorusuarios.objUsuario.apellido}">
+
+                </b:inputText>
+                <b:inputText label="Direccion:" labelStyle="width:80px;" value="#{controladorusuarios.objUsuario.direccion}">
+
+
+                </b:inputText>
+                <b:inputText label="Correo:" labelStyle="width:80px;" value="#{controladorusuarios.objUsuario.correo}">
+                    <f:facet name="prepend">
+                        <h:outputText value="@"/>
+                    </f:facet>
+
+                </b:inputText>
+                <b:inputText label="Contraseña: " labelStyle="width:80px;" value="#{controladorusuarios.objUsuario.contraseña}">
+
+
+                </b:inputText>
+            </h:panelGrid>
+
+            <h:commandButton value="Enviar" action="#{controladorusuarios.registrar()}"></h:commandButton>
+        </b:form>
+
+
+
+    </h:body>
+</html>    

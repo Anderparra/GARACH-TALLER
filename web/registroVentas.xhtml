@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Garach</title>
+        <meta name="author" content="The Author"></meta>
+    </h:head>
+    <!-- Add 50px padding top to the body for the navbar -->
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <b:navBar brand="Garach" brandHref="#" inverse="true" fixed="top">
+            <b:navbarLinks>
+
+                <b:navLink value="Comprar" href="venta.xhtml"></b:navLink>
+
+                <b:dropMenu value="Registrarse">
+                    <b:navLink value="Usuario" href="faces/usuarios.xhtml"></b:navLink>
+                    <b:navLink value="Administrador" href="faces/administradores.xhtml"></b:navLink>
+
+                    <b:navLink></b:navLink>
+
+                </b:dropMenu>
+            </b:navbarLinks> 
+
+            <h:form styleClass="navbar-form navbar-right">
+
+
+
+                <b:commandButton action="#" value="Bienvenido #{controllerAdministradores.nombre}"  iconAlign="right"/>
+                <b:commandButton action="#{controllerAdministradores.dirigir()}" value="Cerrar sesion"  iconAlign="right"/>
+
+            </h:form>
+        </b:navBar>
+        <h:form>
+            <b:inputText label="Nombre Columna" value="#{controladorVenta.searchName}" ></b:inputText>
+            <b:inputText label="Busqueda" value="#{controladorVenta.search}" ></b:inputText>
+
+            <h:commandButton value="Enviar" action="#{controladorVenta.findAllBySearch()}"></h:commandButton>
+        </h:form>
+
+        <h:form >
+            <b:dataTable value="#{controladorVenta.findAll()}" var="ven" searching="false" paginated="false" info="false">
+                <b:dataTableColumn value="#{ven.id}" />
+                <b:dataTableColumn value="#{ven.fechaVenta}" label="Fecha de venta" />
+                <b:dataTableColumn value="#{ven.idCliente}" />
+                <b:dataTableColumn value="#{ven.idProductos}" />
+                <b:dataTableColumn value="#{ven.cantidad}" />
+                <b:dataTableColumn value="#{ven.subtotal}" />
+                <b:dataTableColumn value="#{ven.total}" />
+
+
+            </b:dataTable>
+        </h:form>
+    </h:body>
+</html>  
